@@ -1,0 +1,10 @@
+# General
+node_modules/
+dist/
+.env
+*.log
+
+# Backend-specific
+pizza-api/node_modules/
+pizza-api/dist/
+pizza-api/.env
