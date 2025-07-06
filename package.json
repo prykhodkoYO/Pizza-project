@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@table-library/react-table-library": "^4.1.7"
+  }
+}

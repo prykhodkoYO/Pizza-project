@@ -2,9 +2,8 @@ import { Scene, SceneEnter } from 'nestjs-telegraf';
 import { BURGER_MENU_ID } from './tgbot.constants';
 import { SceneContext } from '../interfaces/sceneContext.interface';
 import { Ctx, On, Message, Action } from 'nestjs-telegraf';
-import { burgerMenu } from '../tgbot.buttons.js';
-import { menuButtons } from '../tgbot.buttons.js';
-import { menu } from '../tgbot.utils.js';
+import { burgerMenu, menuButtons } from '../tgbot.buttons';
+import { menu } from '../tgbot.utils';
 
 @Scene(BURGER_MENU_ID)
 export class BurgerScene {

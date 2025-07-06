@@ -17,22 +17,13 @@ import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 export class AdminController {
   constructor(private readonly adminService: AdminService) {}
 
-  @Post()
+  @Post('create-admin')
   async createAdmin(
     @Req() req,
     @Body() body: { username: string; password: string },
   ) {
     const creator = req.user;
     return this.adminService.createAdmin(creator, body.username, body.password);
-  }
-
-  @Post('test')
-  async createSuperAdmin(
-    @Req() req,
-    @Body() body: { username: string; password: string },
-  ) {
-    const creator = req.user;
-    return this.adminService.createSuperadmin(body.username, body.password);
   }
 
   @Delete(':id')

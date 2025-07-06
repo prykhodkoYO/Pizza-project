@@ -2,8 +2,8 @@ import { Scene, SceneEnter } from 'nestjs-telegraf';
 import { CART_ID } from './tgbot.constants';
 import { SceneContext } from '../interfaces/sceneContext.interface';
 import { Ctx, Action } from 'nestjs-telegraf';
-import { cartButtons, menuButtons } from '../tgbot.buttons.js';
-import { OrderService } from 'src/order/order.service';
+import { cartButtons, menuButtons } from '../tgbot.buttons';
+import { OrderService } from '../../order/order.service';
 
 @Scene(CART_ID)
 export class CartScene {
@@ -28,7 +28,9 @@ export class CartScene {
   @Action('history')
   async showHistory(@Ctx() ctx: SceneContext) {
     await ctx.reply(
-      await this.orderService.getOrdersByUser(ctx.session['state'].userId),
+      await this.orderService.getOrdersByCustomer(
+        ctx.session['state'].customerId,
+      ),
     );
   }
 
@@ -38,7 +40,7 @@ export class CartScene {
       await this.orderService.createOrder(
         ctx.session['state'].getDescription(),
         ctx.session['state'].totalPrice,
-        ctx.session['state'].userId,
+        ctx.session['state'].customerId,
       );
       await ctx.session['state'].resetAmounts();
     } else {

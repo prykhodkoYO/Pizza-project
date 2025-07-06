@@ -17,12 +17,12 @@ interface Menu {
 export class CartCalculator {
   menu: Menu;
   phoneNumber: string;
-  userId: number;
+  customerId: number;
 
-  constructor(menu: Menu, phoneNumber: string, userId: number) {
+  constructor(menu: Menu, phoneNumber: string, customerId: number) {
     this.menu = menu;
     this.phoneNumber = phoneNumber;
-    this.userId = userId;
+    this.customerId = customerId;
   }
 
   getDescription(): string {

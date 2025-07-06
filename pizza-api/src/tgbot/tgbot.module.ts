@@ -11,16 +11,16 @@ import { PizzaScene } from './scenes/pizzaMenu.scene';
 import { BurgerScene } from './scenes/burgerMenu.scene';
 import { DrinkScene } from './scenes/drinkMenu.scene';
 import { CartScene } from './scenes/cart.scene';
-import { UserModule } from '../user/user.module';
-import { User } from '../user/user.entity';
-import { UserService } from '../user/user.service';
+import { CustomerModule } from '../customer/customer.module';
+import { Customer } from '../customer/customer.entity';
+import { CustomerService } from '../customer/customer.service';
 
 @Module({
   controllers: [TgbotController],
   providers: [
     TgbotService,
     TgBotUpdate,
-    UserService,
+    CustomerService,
     OrderService,
     GreetingScene,
     PizzaScene,
@@ -31,8 +31,8 @@ import { UserService } from '../user/user.service';
   imports: [
     OrderModule,
     TypeOrmModule.forFeature([Order]),
-    UserModule,
-    TypeOrmModule.forFeature([User]),
+    CustomerModule,
+    TypeOrmModule.forFeature([Customer]),
   ],
 })
 export class TgbotModule {}

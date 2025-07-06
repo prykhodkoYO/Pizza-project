@@ -39,7 +39,7 @@ export function pizzaMenu() {
       Markup.button.callback('⬅️Back to menu', 'backToMenu'),
     ],
     {
-      columns: 3,
+      columns: 2,
     },
   );
 }
@@ -55,7 +55,7 @@ export function burgerMenu() {
       Markup.button.callback('⬅️Back to menu', 'backToMenu'),
     ],
     {
-      columns: 3,
+      columns: 2,
     },
   );
 }
@@ -71,7 +71,7 @@ export function drinkMenu() {
       Markup.button.callback('⬅️Back to menu', 'backToMenu'),
     ],
     {
-      columns: 3,
+      columns: 2,
     },
   );
 }

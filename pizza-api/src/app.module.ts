@@ -7,9 +7,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Order } from './order/order.entity';
 import { TelegrafModule } from 'nestjs-telegraf';
 import { TgbotModule } from './tgbot/tgbot.module';
-import { UserModule } from './user/user.module';
+import { CustomerModule } from './customer/customer.module';
 import * as LocalSession from 'telegraf-session-local';
-import { User } from './user/user.entity';
+import { Customer } from './customer/customer.entity';
 import { Admin } from './admin/admin.entity';
 import { AdminModule } from './admin/admin.module';
 import { AuthModule } from './auth/auth.module';
@@ -18,7 +18,7 @@ const sessions = new LocalSession({ database: 'session_db.json' });
 @Module({
   imports: [
     OrderModule,
-    UserModule,
+    CustomerModule,
     AdminModule,
     AuthModule,
 
@@ -32,7 +32,7 @@ const sessions = new LocalSession({ database: 'session_db.json' });
         username: configService.get('DB_USERNAME'),
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_NAME'),
-        entities: [Order, User, Admin],
+        entities: [Order, Customer, Admin],
         synchronize: true,
       }),
       inject: [ConfigService],

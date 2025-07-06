@@ -1,4 +1,4 @@
-import { User } from '../user/user.entity';
+import { Customer } from '../customer/customer.entity';
 import {
   Entity,
   Column,
@@ -20,12 +20,9 @@ export class Order {
   @CreateDateColumn()
   createdAt: Date;
 
-  @ManyToOne(() => User, (user) => user.orders, {
+  @ManyToOne(() => Customer, (customer) => customer.orders, {
     onDelete: 'CASCADE',
     nullable: false,
   })
-  user: User;
-
-  @Column({ default: true })
-  isFinished: boolean;
+  customer: Customer;
 }

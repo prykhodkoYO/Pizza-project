@@ -2,46 +2,46 @@ import { Injectable } from '@nestjs/common';
 import { Order } from './order.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from 'src/user/user.entity';
+import { Customer } from 'src/customer/customer.entity';
 
 @Injectable()
 export class OrderService {
   constructor(
     @InjectRepository(Order)
-    private usersRepository: Repository<Order>,
+    private orderRepository: Repository<Order>,
   ) {}
 
   findAll(): Promise<Order[]> {
-    return this.usersRepository.find();
+    return this.orderRepository.find();
   }
 
   findOne(id: number): Promise<Order | null> {
-    return this.usersRepository.findOneBy({ id });
+    return this.orderRepository.findOneBy({ id });
   }
 
   async remove(id: number): Promise<void> {
-    await this.usersRepository.delete(id);
+    await this.orderRepository.delete(id);
   }
 
   async createOrder(
     description: string,
     amount: number,
-    user: User,
+    customer: Customer,
   ): Promise<any> {
-    await this.usersRepository.insert({
+    await this.orderRepository.insert({
       description,
       amount,
-      user,
+      customer,
     });
   }
 
   async createAmount(amount: number): Promise<any> {
-    await this.usersRepository.insert({ amount: amount });
+    await this.orderRepository.insert({ amount: amount });
   }
 
-  async getOrdersByUser(userId: number): Promise<string> {
-    const orders = await this.usersRepository.find({
-      where: { user: { id: userId }, isFinished: true },
+  async getOrdersByCustomer(customerId: number): Promise<string> {
+    const orders = await this.orderRepository.find({
+      where: { customer: { id: customerId } },
     });
 
     if (orders.length === 0) {
@@ -64,11 +64,11 @@ export class OrderService {
     page: number,
     limit: number,
   ): Promise<{ data: Order[]; total: number }> {
-    const [orders, total] = await this.usersRepository.findAndCount({
+    const [orders, total] = await this.orderRepository.findAndCount({
       skip: (page - 1) * limit,
       take: limit,
       order: { id: 'ASC' },
-      relations: ['user'],
+      relations: ['customer'],
     });
 
     return { data: orders, total };

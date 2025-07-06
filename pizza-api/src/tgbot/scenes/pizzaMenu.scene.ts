@@ -2,8 +2,8 @@ import { Scene, SceneEnter } from 'nestjs-telegraf';
 import { PIZZA_MENU_ID } from './tgbot.constants';
 import { SceneContext } from '../interfaces/sceneContext.interface';
 import { Ctx, On, Message, Action } from 'nestjs-telegraf';
-import { menuButtons, pizzaMenu } from '../tgbot.buttons.js';
-import { menu } from '../tgbot.utils.js';
+import { menuButtons, pizzaMenu } from '../tgbot.buttons';
+import { menu } from '../tgbot.utils';
 
 @Scene(PIZZA_MENU_ID)
 export class PizzaScene {

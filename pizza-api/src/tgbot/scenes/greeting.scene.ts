@@ -1,15 +1,15 @@
 import { Message, On, Scene, SceneEnter } from 'nestjs-telegraf';
-import { GREETING_SCENE_ID } from './tgbot.constants.js';
+import { GREETING_SCENE_ID } from './tgbot.constants';
 import { SceneContext } from '../interfaces/sceneContext.interface.js';
 import { Ctx } from 'nestjs-telegraf';
-import { menuButtons } from '../tgbot.buttons.js';
-import { CartCalculator, menu } from '../tgbot.utils.js';
+import { menuButtons } from '../tgbot.buttons';
+import { CartCalculator, menu } from '../tgbot.utils';
 import * as _ from 'lodash';
-import { UserService } from '../../user/user.service';
+import { CustomerService } from '../../customer/customer.service';
 
 @Scene(GREETING_SCENE_ID)
 export class GreetingScene {
-  constructor(private userService: UserService) {}
+  constructor(private customerService: CustomerService) {}
   @SceneEnter()
   async onSceneEnter(@Ctx() ctx: SceneContext) {
     await ctx.reply('Hi, to use the bot, enter your phone number.');
@@ -22,12 +22,12 @@ export class GreetingScene {
   ) {
     const ukrPhoneRegex = /^(\+380|0)\d{9}$/;
     if (ukrPhoneRegex.test(message)) {
-      await this.userService.createUser(message);
-      const user = await this.userService.findOneByPhone(message);
+      await this.customerService.createCustomer(message);
+      const customer = await this.customerService.findOneByPhone(message);
       const cart = new CartCalculator(
         _.cloneDeep(menu),
-        user.phoneNumber,
-        user.id,
+        customer.phoneNumber,
+        customer.id,
       );
       ctx.session['state'] = cart;
       await ctx.reply(

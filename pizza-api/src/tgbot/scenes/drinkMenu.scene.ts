@@ -2,9 +2,8 @@ import { Scene, SceneEnter } from 'nestjs-telegraf';
 import { DRINK_MENU_ID } from './tgbot.constants';
 import { SceneContext } from '../interfaces/sceneContext.interface';
 import { Ctx, On, Message, Action } from 'nestjs-telegraf';
-import { drinkMenu } from '../tgbot.buttons.js';
-import { menuButtons } from '../tgbot.buttons.js';
-import { menu } from '../tgbot.utils.js';
+import { drinkMenu, menuButtons } from '../tgbot.buttons';
+import { menu } from '../tgbot.utils';
 
 @Scene(DRINK_MENU_ID)
 export class DrinkScene {

@@ -49,7 +49,6 @@ lerna-debug.log*
 # Runtime data
 pids
 *.pid
-*.seed
 *.pid.lock
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
@@ -58,5 +57,3 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 # Sessions
 session_db.json
 
-# Seed for admin
-src/admin/admin-seed.ts

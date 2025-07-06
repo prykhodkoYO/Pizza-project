@@ -8,7 +8,7 @@ import {
 } from 'typeorm';
 
 @Entity()
-export class User {
+export class Customer {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -18,6 +18,6 @@ export class User {
   @CreateDateColumn()
   createdAt: Date;
 
-  @OneToMany(() => Order, (order) => order.user, { nullable: true })
+  @OneToMany(() => Order, (order) => order.customer, { nullable: true })
   orders: Order[];
 }

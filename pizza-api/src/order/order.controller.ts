@@ -8,7 +8,7 @@ import {
   Query,
 } from '@nestjs/common';
 import { OrderService } from './order.service';
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @UseGuards(JwtAuthGuard)
 @Controller('order')
@@ -20,7 +20,7 @@ export class OrderController {
     return this.orderService.createOrder(
       body.description,
       body.amount,
-      body.user,
+      body.customer,
     );
   }
 
@@ -29,9 +29,11 @@ export class OrderController {
     return this.orderService.findAll();
   }
 
-  @Get('user/:userId')
-  async getOrdersByUser(@Param('userId') userId: number): Promise<string> {
-    return this.orderService.getOrdersByUser(userId);
+  @Get('customer/:customerId')
+  async getOrdersByCustomer(
+    @Param('customerId') customerId: number,
+  ): Promise<string> {
+    return this.orderService.getOrdersByCustomer(customerId);
   }
 
   @Get('get-pages')
