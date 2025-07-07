@@ -8,6 +8,7 @@ import {
   Get,
   Param,
   ParseIntPipe,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { AdminService } from './admin.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
@@ -29,6 +30,10 @@ export class AdminController {
   @Delete(':id')
   async removeAdmin(@Req() req, @Param('id', ParseIntPipe) id: number) {
     const creator = req.user;
+
+    if (!creator.isSuperAdmin) {
+      throw new UnauthorizedException('Only superadmin can remove admins');
+    }
     return this.adminService.removeAdmin(creator, id);
   }
 

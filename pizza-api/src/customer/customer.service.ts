@@ -40,15 +40,15 @@ export class CustomerService {
     return { data: customers, total };
   }
 
-  async deleteCustomerByPhone(phoneNumber: string): Promise<void> {
+  async deleteCustomerById(customerId: number): Promise<void> {
     const customer = await this.customerRepository.findOne({
-      where: { phoneNumber },
+      where: { id: customerId },
     });
 
     if (!customer) {
       throw new NotFoundException('Customer not found');
     }
 
-    await this.customerRepository.remove(customer);
+    await this.customerRepository.delete(customerId);
   }
 }

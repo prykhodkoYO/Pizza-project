@@ -7,6 +7,7 @@ import {
   Delete,
   Query,
   UseGuards,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { CustomerService } from './customer.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
@@ -36,12 +37,12 @@ export class CustomerController {
     return this.customerService.getAllOrders(page, limit);
   }
 
-  @Delete('delete/:phone')
+  @Delete(':id')
   @UseGuards(JwtAuthGuard)
   async deleteCustomerByPhone(
-    @Param('phone') phone: string,
+    @Param('id', ParseIntPipe) id: number,
   ): Promise<{ message: string }> {
-    await this.customerService.deleteCustomerByPhone(phone);
+    await this.customerService.deleteCustomerById(id);
     return { message: 'Customer deleted' };
   }
 }

@@ -46,8 +46,11 @@ export class AdminService {
     password: string,
   ): Promise<Admin> {
     if (!creator.isSuperAdmin) {
-      console.log(creator);
       throw new UnauthorizedException('Only superadmin can add new admins');
+    }
+
+    if (!username || !password) {
+      throw new Error('Incorrect username or password');
     }
 
     const newAdmin = this.adminRepository.create({ username, password });
@@ -55,10 +58,6 @@ export class AdminService {
   }
 
   async removeAdmin(creator: Admin, adminId: number): Promise<void> {
-    if (!creator.isSuperAdmin) {
-      throw new UnauthorizedException('Only superadmin can remove admins');
-    }
-
     const admin = await this.adminRepository.findOne({
       where: { id: adminId },
     });

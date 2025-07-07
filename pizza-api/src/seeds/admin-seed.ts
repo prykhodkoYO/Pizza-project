@@ -13,7 +13,7 @@ async function seed() {
 
   try {
     await adminService.createSuperadmin(username, password);
-    console.log(
+    console.debug(
       `✅ Superadmin created successfully: ${username} / ${password}`,
     );
   } catch (error) {
