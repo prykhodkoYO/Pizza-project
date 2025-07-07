@@ -1,4 +1,4 @@
-# 🍕 Pizza Project
+# 🍕 Tg-bot for delivery with admin page
 
 A full-fledged fullstack project with an admin panel.
 
@@ -13,3 +13,10 @@ A full-fledged fullstack project with an admin panel.
 cd pizza-api
 npm install
 npm run start:dev
+```
+## Running the Frontend
+
+```bash
+cd pizza-client
+npm install
+npm run start
